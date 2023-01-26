@@ -12,4 +12,17 @@ public class Smartphone extends Product {
         super(id, name, price, title);
         this.maker = maker;
     }
+
+    public boolean matches(String search) {
+        if (super.matches(search)) {
+            return true;
+        }
+        if (maker.contains(search)) {
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

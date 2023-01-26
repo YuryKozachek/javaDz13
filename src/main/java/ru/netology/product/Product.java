@@ -28,4 +28,10 @@ public class Product {
         this.price = price;
         this.title = title;
     }
+
+    public boolean matches(String search) {
+
+        return getName().contains(search);
+    }
+
 }
