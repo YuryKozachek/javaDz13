@@ -16,7 +16,7 @@ public class ProductRepo {
         productsArray = newArray;
     }
 
-    public Product[] findAll() {  // возвращаем значения массива
+    public Product[] findAll() {
         return productsArray;
     }
 
