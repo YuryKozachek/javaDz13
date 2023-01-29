@@ -16,19 +16,37 @@ public class ProductRepo {
         productsArray = newArray;
     }
 
-    public Product[] findAll() {  // возвращаем значения массива
+    public Product[] findAll() {
         return productsArray;
     }
 
-    public void delById(int id) {
+    public void removeById(int idNum) {
+        try {
+            findById(idNum);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Element with id: " + " not found");
+        }
+
+
         Product[] delArray = new Product[productsArray.length - 1];
         int i = 0;
         for (Product prod : productsArray) {
-            if (prod.getId() != id) {
+            if (prod.getId() != idNum) {
                 delArray[i] = prod;
                 i++;
             }
         }
         productsArray = delArray;
+    }
+
+    public Product findById(int id) {
+
+        for (Product prod : productsArray) {
+            if (prod.getId() == id) {
+                return prod;
+            }
+        }
+//        return null;
+        throw new NotFoundException("Element with id: " + id + " not found");
     }
 }

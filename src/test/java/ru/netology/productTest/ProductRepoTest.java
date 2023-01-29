@@ -2,10 +2,7 @@ package ru.netology.productTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.netology.product.Book;
-import ru.netology.product.Product;
-import ru.netology.product.ProductRepo;
-import ru.netology.product.Smartphone;
+import ru.netology.product.*;
 
 public class ProductRepoTest {
 
@@ -18,6 +15,19 @@ public class ProductRepoTest {
     Product smart1 = new Smartphone(10, "3310", 1400, "smart1", "Nokia1");
     Product smart2 = new Smartphone(15, "3310-10", 1800, "smart2", "Nokia2");
     Product smart3 = new Smartphone(17, "3310-20", 1900, "smart3", "Nokia3");
+
+//    @Test
+//    public void findById() {
+//        repo.addNewProd(book1);
+//        repo.addNewProd(book2);
+//        repo.addNewProd(book3);
+//
+//
+//        Product[] expected = {book2};
+//        Product[] actual = new Product[]{repo.findById(2)};
+//
+//        Assertions.assertArrayEquals(expected, actual);
+//    }
 
 
     @Test
@@ -35,23 +45,34 @@ public class ProductRepoTest {
     }
 
     @Test
-    public void delProductById() {
+    public void removeExistingProductById() {
 
 
         repo.addNewProd(book1);
-        repo.addNewProd(smart1);
+        repo.addNewProd(book2);
         repo.addNewProd(book3);
-        repo.addNewProd(smart3);
-        repo.addNewProd(smart2);
 
-        repo.delById(1);
-        repo.delById(17);
+        repo.removeById(2);
 
-        Product[] expected = {smart1, book3, smart2};
+
+        Product[] expected = {book1, book3};
         Product[] actual = repo.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void removeNonExistingProductById() {
+
+
+        repo.addNewProd(book1);
+        repo.addNewProd(book2);
+        repo.addNewProd(book3);
+
+        Assertions.assertThrows(NotFoundException.class, () ->
+                repo.removeById(-100));
+    }
+
 
     @Test
     public void addProductSame() {
